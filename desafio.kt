@@ -1,21 +1,39 @@
-// [Template no Kotlin Playground](https://pl.kotl.in/WcteahpyN)
-
 enum class Nivel { BASICO, INTERMEDIARIO, DIFICIL }
+data class Usuario(val nome: String, val idade: Int)
+data class Matricula(val usuario: Usuario, val formacao: Formacao, val nivel: Nivel)
+data class Formacao(var formacao: String,var conteudo: List<String>, val duracao: Int, val tempo: String)
 
-class Usuario
+  
 
-data class ConteudoEducacional(var nome: String, val duracao: Int = 60)
-
-data class Formacao(val nome: String, var conteudos: List<ConteudoEducacional>) {
-
-    val inscritos = mutableListOf<Usuario>()
     
-    fun matricular(usuario: Usuario) {
-        TODO("Utilize o parâmetro $usuario para simular uma matrícula (usar a lista de $inscritos).")
+fun Matriculados(inscritos: List<Usuario>, matriculados: List<Matricula>) {
+        
+    println("Total de inscritos: "+inscritos.size)
+    var indice=0
+    println("Lista de Matriculados: ")
+     for(alunos in matriculados){
+          println("Nome:"+alunos.usuario.nome+" Idade:"+alunos.usuario.idade)  
     }
+   
 }
 
 fun main() {
-    TODO("Analise as classes modeladas para este domínio de aplicação e pense em formas de evoluí-las.")
-    TODO("Simule alguns cenários de teste. Para isso, crie alguns objetos usando as classes em questão.")
+    val usuarios = mutableListOf<Usuario>()
+    val matriculados=mutableListOf<Matricula>()
+    
+    val conteudoEducacional=mutableListOf("P.O.O.", "Funções","Coleções","Estruturas de Repetição")
+    val formacao=Formacao("Kotlin Web", conteudoEducacional, 30,"dias")
+
+    usuarios+=Usuario("JP",21)
+    usuarios+=Usuario("PC",22)
+   
+    for(users in usuarios){
+  
+        matriculados+=Matricula(users,formacao,Nivel.BASICO)
+        
+    }
+    
+  Matriculados(usuarios,matriculados)    
+    
+    
 }
